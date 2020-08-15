@@ -4,25 +4,27 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// expression : คำสั่ง js ง่ายๆ ใน html
-function WithJSX() {
-  const message = "Hello, I'm builder"
+// function vs class
+
+function HelloWorld() {
+  const message = "Hello, I'm builder in function"
   return(
   <>
-    <h1 alt={'Eiei'}>With JSX Ka.</h1>
-    <h2 alt={'expression'}>{ message }</h2>
-    <h2 alt={'expression'}>1 + 2 = { 1 + 2 }</h2>
-    <ol>
-      <li>builder <span style={{color: 'red'}}>(winner)</span></li>
-      <li>oatter</li>
-    </ol>
+    <h1>{ message }</h1>
   </>
   )
 }
 
+class HelloWorldComp extends React.Component {
+  render() {
+    return <h1> My Class Component</h1>
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <WithJSX />
+    <HelloWorld />
+    <HelloWorldComp />
   </React.StrictMode>,
   document.getElementById('root')
 );
