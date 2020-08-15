@@ -4,21 +4,24 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-function WithoutJSX() {
-  return React.createElement('h1', {alt: 'Eiei'}, "Without JSX !!");
-}
-
+// expression : คำสั่ง js ง่ายๆ ใน html
 function WithJSX() {
+  const message = "Hello, I'm builder"
   return(
   <>
     <h1 alt={'Eiei'}>With JSX Ka.</h1>
+    <h2 alt={'expression'}>{ message }</h2>
+    <h2 alt={'expression'}>1 + 2 = { 1 + 2 }</h2>
+    <ol>
+      <li>builder <span style={{color: 'red'}}>(winner)</span></li>
+      <li>oatter</li>
+    </ol>
   </>
   )
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <WithoutJSX />
     <WithJSX />
   </React.StrictMode>,
   document.getElementById('root')
