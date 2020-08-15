@@ -6,8 +6,12 @@ import * as serviceWorker from './serviceWorker';
 
 class Toggle extends React.Component {
 
-  state = {
-    isToggleOn: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      isToggleOn: false
+    }
+    this.handleClickEvent = this.handleClick.bind(this)
   }
 
   handleClick = () => {
