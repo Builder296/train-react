@@ -17,12 +17,15 @@ class HelloWorldComp extends React.Component {
   }
 
   onAdd = () => {
-    const { count, countMore } = this.state;
-    this.setState({
-      count: count + 1,
+    const { countMore } = this.state;
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
       countMore: countMore + 2
-    }); 
-    // Should be call setState 1 time per once work
+    }));
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
+      countMore: countMore + 2
+    }));
   }
 
   render() {
