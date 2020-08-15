@@ -4,9 +4,6 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// function vs class
-// props
-
 function HelloWorld({builder}) {
   const message = `Hello, I'm ${builder} in function`
   return(
@@ -21,13 +18,13 @@ class HelloWorldComp extends React.Component {
     return <>
       <h1> My Class Component </h1>
       <h2> { this.props.message } </h2>
+      <HelloWorld builder="builder" />
     </>
   }
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <HelloWorld builder="builder" />
     <HelloWorldComp message="ทดสอบ props" />
   </React.StrictMode>,
   document.getElementById('root')
