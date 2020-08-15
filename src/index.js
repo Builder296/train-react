@@ -9,7 +9,11 @@ function WithoutJSX() {
 }
 
 function WithJSX() {
-  return <h1 alt={'Eiei'}>With JSX Ka.</h1>
+  return(
+  <>
+    <h1 alt={'Eiei'}>With JSX Ka.</h1>
+  </>
+  )
 }
 
 ReactDOM.render(
