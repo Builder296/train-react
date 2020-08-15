@@ -39,10 +39,13 @@ class HelloWorldComp extends React.Component {
 function Car({isHonda, isToyota}) {
   let car;
   if (isHonda) {
-    car = <h2>Honda!!</h2>
+    car = <h2>Honda!!</h2>;
   }
   if (isToyota) {
-    car = <h2>Toyota!!</h2>
+    car = <h2>Toyota!!</h2>;
+  }
+  if (!isHonda && !isToyota) {
+    return null;
   }
   return <>
     <h1>This is brand : <span style={{color: 'grey'}}>{car ? car : "No name."}</span></h1> 
