@@ -4,7 +4,7 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// state
+// condition rendering
 class HelloWorldComp extends React.Component {
 
   constructor(props) {
@@ -22,13 +22,12 @@ class HelloWorldComp extends React.Component {
       count: prevState.count + 1,
       countMore: countMore + 2
     }));
-    this.setState((prevState) => ({
-      count: prevState.count + 1,
-      countMore: countMore + 2
-    }));
   }
 
   render() {
+    if(this.state.count % 3 === 2) {
+      return <h2>This is a book.</h2>
+    }
     const {message, count, countMore} = this.state 
     return <>
       <h1> { message } :: { count } : { countMore }</h1>
@@ -37,9 +36,19 @@ class HelloWorldComp extends React.Component {
   }
 }
 
+function Car(props) {
+  const isHonda = props.isHonda;
+  if (isHonda) {
+    return <h1>Honda!!</h1>
+  }
+  return <h1>No Honda.</h1>
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <HelloWorldComp />
+    {/* <HelloWorldComp /> */}
+    <Car isHonda={true} />
+    <Car isHonda={false} />
   </React.StrictMode>,
   document.getElementById('root')
 );
