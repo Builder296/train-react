@@ -11,19 +11,24 @@ class HelloWorldComp extends React.Component {
     super(props) // กรุณาส่ง props มาให้ด้วย
     this.state = {
       message: "My first state",
-      count: 0
+      count: 0,
+      countMore: 2,
     };
   }
 
   onAdd = () => {
-    const { count } = this.state;
-    this.setState({ count: count + 1 });
+    const { count, countMore } = this.state;
+    this.setState({
+      count: count + 1,
+      countMore: countMore + 2
+    }); 
+    // Should be call setState 1 time per once work
   }
 
   render() {
-    const {message, count} = this.state 
+    const {message, count, countMore} = this.state 
     return <>
-      <h1> { message } : { count }</h1>
+      <h1> { message } :: { count } : { countMore }</h1>
       <button onClick={this.onAdd}>Add</button>
     </>
   }
