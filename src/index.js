@@ -4,30 +4,6 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-class Toggle extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      isToggleOn: false
-    }
-    this.handleClickEvent = this.handleClick.bind(this)
-  }
-
-  handleClick = () => {
-    this.setState((p) => ({isToggleOn: !p.isToggleOn}))
-  }
-
-  render() {
-    const { isToggleOn } = this.state;
-    return <>
-      <button onClick={this.handleClick}>
-        {isToggleOn ? 'On' : 'Off'}
-      </button>
-    </>
-  }
-}
-
 class InputComp extends React.Component {
 
   constructor(props) {
@@ -38,22 +14,27 @@ class InputComp extends React.Component {
   }
 
   onChange = (event) => {
-    const { name } = event.target.value;
+    const name = event.target.value;
     this.setState({name});
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    alert('Your name is ' + this.state.name);
   }
 
   render() {
     const { name } = this.state;
-    return <>
+    const header = name ? <h1>Hello, {name}.</h1> : null;
+    return <form onSubmit={this.onSubmit}>
+      {header}
       <input value={name} onChange={this.onChange} />
-    </>
+    </form>
   }
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <Toggle/>
-    <br/>
     <InputComp name={'props ka'}/> 
   </React.StrictMode>,
   document.getElementById('root')
