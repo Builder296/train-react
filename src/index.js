@@ -60,13 +60,12 @@ class Example extends React.Component {
   }
 }
 
-function ItemList(porps) {
-  const Items = [];
-  for (let i = 0 ; i < porps.numbers.length ; i++  ) {
-    Items.push(<li key={i}> {i % 2 === 0 ? 'even' : 'odd'} </li>)
-  }
+function ItemList({numbers}) {
   return<>
-    <ul>{Items}</ul>
+    <h5>more short</h5>
+    <ul>
+      {numbers.map(n => <li key={n}>{n}</li>)}
+    </ul>
   </>
 }
 
