@@ -36,19 +36,25 @@ class HelloWorldComp extends React.Component {
   }
 }
 
-function Car(props) {
-  const isHonda = props.isHonda;
+function Car({isHonda, isToyota}) {
+  let car;
   if (isHonda) {
-    return <h1>Honda!!</h1>
+    car = <h2>Honda!!</h2>
   }
-  return <h1>No Honda.</h1>
+  if (isToyota) {
+    car = <h2>Toyota!!</h2>
+  }
+  return <>
+    <h1>This is brand : <span style={{color: 'grey'}}>{car ? car : "No name."}</span></h1> 
+  </>
 }
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <HelloWorldComp /> */}
     <Car isHonda={true} />
-    <Car isHonda={false} />
+    <Car isToyota={true} />
+    <Car />
   </React.StrictMode>,
   document.getElementById('root')
 );
