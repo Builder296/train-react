@@ -4,77 +4,44 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-class Quiz extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      count: 0,
-    };
-  }
-
-  isOddOrEven(number) {
-    if (number % 2 === 0) {
-      return "even"
-    }
-    return "odd"
-  }
-
-  onAdd = () => {
-    this.setState({ count: this.state.count + 1 })
-  }
-
-  render() {
-    const { count } = this.state;
-    let items = [];
-    for (let i = 1 ; i <= count ; i++  ) {
-      items.push(<li key={i}> {i} : {this.isOddOrEven(i)} </li>)
-    }
-    return <>
-      <button onClick={this.onAdd}>Add</button>
-      <ol>
-        { items }
-      </ol>
-    </>
-  }
-}
-
-class Example extends React.Component {
+class ItemEvent extends React.Component {
 
   state = {
-    count: 0
+    numbers: [1, 2, 3, 4, 5]
+  }
+
+  componentDidMount() {
+    // setTimeout(() => {
+    //   const state = this.state.numbers;
+    //   state.shift();
+    //   this.setState({ numbers: [...state]});
+    // })
+  }
+
+  add = () => {
+    this.setState({ numbers: [...this.state.numbers, this.state.numbers[this.state.numbers.length-1] + 1]})
   }
 
   render() {
-    const { count } = this.state;
-    const number = []
-    for (let i = 1 ; i <= count ; i++  ) {
-      number.push(<li key={i}> {i % 2 === 0 ? 'even' : 'odd'} </li>)
-    }
+    const { numbers } = this.state;
     return <>
-      <button onClick={() => this.setState({count: count+1})}>Add</button>
-      <ul>
-        {number}
-      </ul>
+      <button onClick={this.add}>Add</button>
+      <ItemList numbers = {numbers}/>
     </>
   }
 }
 
 function ItemList({numbers}) {
   return<>
-    <h5>more short</h5>
     <ul>
       {numbers.map(n => <li key={n}>{n}</li>)}
     </ul>
   </>
 }
 
-const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
-    <Quiz />
-    <Example />
-    <ItemList numbers = {numbers}/>
+    <ItemEvent />
   </React.StrictMode>,
   document.getElementById('root')
 );
