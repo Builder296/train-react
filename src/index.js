@@ -28,9 +28,33 @@ class Toggle extends React.Component {
   }
 }
 
+class InputComp extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: props.name
+    }
+  }
+
+  onChange = (event) => {
+    const { name } = event.target.value;
+    this.setState({name});
+  }
+
+  render() {
+    const { name } = this.state;
+    return <>
+      <input value={name} onChange={this.onChange} />
+    </>
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Toggle/>
+    <br/>
+    <InputComp name={'props ka'}/> 
   </React.StrictMode>,
   document.getElementById('root')
 );
