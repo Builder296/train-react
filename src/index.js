@@ -46,6 +46,7 @@ function Car({isHonda, isToyota}) {
   }
   return <>
     <h1>This is brand : <span style={{color: 'grey'}}>{car ? car : "No name."}</span></h1> 
+    {car && <h4>Inline logical</h4>}
   </>
 }
 
