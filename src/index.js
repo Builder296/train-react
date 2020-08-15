@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+function WithoutJSX() {
+  return React.createElement('h1', {alt: 'Eiei'}, "Without JSX !!");
+}
+
+function WithJSX() {
+  return <h1 alt={'Eiei'}>With JSX Ka.</h1>
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <WithoutJSX />
+    <WithJSX />
   </React.StrictMode>,
   document.getElementById('root')
 );
