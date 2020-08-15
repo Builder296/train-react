@@ -57,9 +57,37 @@ class NewItemEventQuiz extends React.Component {
   render() {
     const { listText } = this.state;
     return <>
+      <h5>Quiz Two</h5>
       <input onChange={(event) => this.onChange(event)} />
       <button onClick={this.add}>Add</button>
       <ItemList numbers = {listText}/>
+    </>
+  }
+}
+
+class ExampleTwo extends React.Component {
+  state = {
+    items: []
+  }
+
+  add = (event) => {
+    if(event.key === 'Enter') { // directly access to DOM
+      const { value } = event.target;
+      this.setState((previousState) => (
+        {items: [...previousState.items, value]}
+      ));
+      event.target.value = '';
+    }
+  }
+
+  render() {
+    const { items } = this.state;
+    return <>
+      <h5>Example Two</h5>
+      <input onKeyUp={this.add} />
+      <ul>
+        {items.map((v) => <li>{v}</li>)}
+      </ul>
     </>
   }
 }
@@ -68,6 +96,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ItemEvent />
     <NewItemEventQuiz />
+    <ExampleTwo />
   </React.StrictMode>,
   document.getElementById('root')
 );
