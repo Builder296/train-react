@@ -86,7 +86,7 @@ class ExampleTwo extends React.Component {
       <h5>Example Two</h5>
       <input onKeyUp={this.add} />
       <ul>
-        {items.map((v) => <li>{v}</li>)}
+        {items.map((v) => <li key={v}>{Number.isNaN(v) ? 'Number' : 'No Number'}</li>)}
       </ul>
     </>
   }
