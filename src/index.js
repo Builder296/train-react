@@ -60,10 +60,22 @@ class Example extends React.Component {
   }
 }
 
+function ItemList(porps) {
+  const Items = [];
+  for (let i = 0 ; i < porps.numbers.length ; i++  ) {
+    Items.push(<li key={i}> {i % 2 === 0 ? 'even' : 'odd'} </li>)
+  }
+  return<>
+    <ul>{Items}</ul>
+  </>
+}
+
+const numbers = [1, 2, 3, 4, 5];
 ReactDOM.render(
   <React.StrictMode>
     <Quiz />
     <Example />
+    <ItemList numbers = {numbers}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
