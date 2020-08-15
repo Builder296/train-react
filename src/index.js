@@ -4,28 +4,26 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-function HelloWorld({builder}) {
-  const message = `Hello, I'm ${builder} in function`
-  return(
-  <>
-    <h1>{ message }</h1>
-  </>
-  )
-}
-
+// state
 class HelloWorldComp extends React.Component {
+
+  constructor(props) {
+    super(props) // กรุณาส่ง props มาให้ด้วย
+    this.state = {
+      message: "My first state"
+    };
+  }
+
   render() {
     return <>
-      <h1> My Class Component </h1>
-      <h2> { this.props.message } </h2>
-      <HelloWorld builder="builder" />
+      <h1> { this.state.message }</h1>
     </>
   }
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <HelloWorldComp message="ทดสอบ props" />
+    <HelloWorldComp />
   </React.StrictMode>,
   document.getElementById('root')
 );
