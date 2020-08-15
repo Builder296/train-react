@@ -4,11 +4,10 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// condition rendering
 class Quiz extends React.Component {
 
   constructor(props) {
-    super(props) // กรุณาส่ง props มาให้ด้วย
+    super(props)
     this.state = {
       count: 0,
     };
@@ -40,9 +39,31 @@ class Quiz extends React.Component {
   }
 }
 
+class Example extends React.Component {
+
+  state = {
+    count: 0
+  }
+
+  render() {
+    const { count } = this.state;
+    const number = []
+    for (let i = 1 ; i <= count ; i++  ) {
+      number.push(<li key={i}> {i % 2 === 0 ? 'even' : 'odd'} </li>)
+    }
+    return <>
+      <button onClick={() => this.setState({count: count+1})}>Add</button>
+      <ul>
+        {number}
+      </ul>
+    </>
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Quiz />
+    <Example />
   </React.StrictMode>,
   document.getElementById('root')
 );
