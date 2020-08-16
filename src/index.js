@@ -1,43 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Quiz 3
-// 2 component has hello !
-// can add more element
-// when passing COMPOSITION or HOC
-/**
- * <div>
- * <h1>Hello</h1>
- * <p>Hello</p>
- * <input/>
- * </div> */ 
+// Hook
+// can use state on function
 
-function HelloGGB() {
-  return <><h1>Hello! Geeky Base.</h1></>
+function Example(props) {
+  const [count, setCount] = useState(0);
+  const [title, setTitle] = useState("");
+
+  return(
+    <>
+      <h1>This is title: {title}</h1>
+      <input value={title} onChange={(event) => setTitle(event.target.value)}/>
+      <h2>{count}</h2>
+      <button onClick={() => setCount(count+1)}>Click!</button>
+    </>
+  )
 }
-
-const makeMoreText = (WrappedComponent) => {
-  return class componentLoading extends React.Component {
-    render() {
-      if (this.props.title) {
-        return <>
-          <h2>{this.props.title}</h2>
-          <WrappedComponent />
-        </>
-      }
-      return <WrappedComponent />
-    }
-  }
-}
-
-const Quiz3 = makeMoreText(HelloGGB)
 
 ReactDOM.render(
   <React.StrictMode>
-    <Quiz3 /> 
-    <Quiz3 title={`I'm Builder`} /> 
+    <Example /> 
   </React.StrictMode>,
   document.getElementById('root')
 );
