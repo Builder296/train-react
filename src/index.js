@@ -1,28 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-function CompositionExample(props) {
-  return props.children;
+function Todo({ color, title }) {
+  return <h3 style={{ color}}>{title}</h3>
 }
 
-function Composition() {
-  const isEven = (parseInt(Math.random()*10,10) % 2) === 0;
-  const element = isEven ? <h2>Hello Even</h2> : <span>Odd</span>
+function TodoList({color}) {
   return <>
-   <h1>Hello World</h1>
-   <CompositionExample>
-      {element}
-   </CompositionExample>
-   <h3>Hello World H3</h3>
+    <Todo title={'todo 1'} color={color}></Todo>
+    <Todo title={'todo 2'} color={color}></Todo>
   </>
+}
+
+class App extends React.Component {
+  render() {
+    return <TodoList color={'red'} />
+  }
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <Composition/> 
+    <App/> 
   </React.StrictMode>,
   document.getElementById('root')
 );
