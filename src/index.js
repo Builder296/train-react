@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -6,9 +6,12 @@ import * as serviceWorker from './serviceWorker';
 // Hook
 // can use state on function
 
+const ColorContext = createContext({color: "red"});
+
 function Example(props) {
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState("");
+  const colorContext = useContext(ColorContext)
 
   const [name, setName] = useState("");
 
@@ -28,7 +31,7 @@ function Example(props) {
 
   return(
     <>
-      <h3>{name}</h3>
+      <h3 style={{color: colorContext.color}}>{name}</h3>
       <h1>This is title: {title}</h1>
       <input value={title} onChange={(event) => setTitle(event.target.value)}/>
       <h2>{count}</h2>
