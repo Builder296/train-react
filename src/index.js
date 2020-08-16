@@ -3,105 +3,41 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-const ColorContext = React.createContext({});
-const FontSizeContent = React.createContext({});
+// Quiz 3
+// 2 component has hello !
+// can add more element
+// when passing COMPOSITION or HOC
+/**
+ * <div>
+ * <h1>Hello</h1>
+ * <p>Hello</p>
+ * <input/>
+ * </div> */ 
 
-// HOC 
-
-class Todo extends React.Component {
-  render() {
-    return (
-      <ColorContext.Consumer>
-        {({color}) => (
-          <FontSizeContent.Consumer>
-            {({fontSize}) => (
-              <h3 style={{ color , fontSize: fontSize + 'px' }}> { this.props.title } </h3>
-            )}
-          </FontSizeContent.Consumer>
-        )}
-      </ColorContext.Consumer>
-    )
-  }
+function HelloGGB() {
+  return <><h1>Hello! Geeky Base.</h1></>
 }
 
-
-function TodoList() {
-  return <>
-    <Todo title={'todo 1'} ></Todo>
-    <Todo title={'todo 2'} ></Todo>
-  </>
-}
-
-class App2 extends React.Component {
-  state = {
-    color: 'red',
-    fontSize: 17,
-    toggleColor: () => {
-      this.setState(() => ({ color: 'pink'}))
-    }
-  }
-  render() {
-    const { color, fontSize, toggleColor } = this.state;
-    return (
-      <ColorContext.Provider value={{ color, toggleColor }}>
-        <FontSizeContent.Provider value={{ fontSize }}>
-          <TodoList />
-        </FontSizeContent.Provider>
-      </ColorContext.Provider>
-    )
-  }
-}
-
-class ErrorBounderies extends React.Component {
-  state = {
-    isError: false
-  }
-
-  static getDerivedStateFromError(error) {
-
-  }
-
-  render() {
-    return <>
-      {this.state.isError ? <span>Something when weong.</span> : <span>Goooood.</span>}
-    </>
-  }
-}
-class App extends React.Component {
-  render() {
-    return <>
-      <ErrorBounderies>
-        <App2 />
-      </ErrorBounderies>
-    </>
-  }
-}
-
-
-// Note : USE 
-// -> export default withLoadingComponent(App);
-// -> <LoadingComponent isLoading={ture} /> 
-
-function Hello() {
-  return <h1>Hello! Geeky Base.</h1>
-}
-
-const withLoadingComponent = (WrappedComponent) => {
+const makeMoreText = (WrappedComponent) => {
   return class componentLoading extends React.Component {
     render() {
-      if (this.props.loading) {
-        return <div>Loading</div>
+      if (this.props.title) {
+        return <>
+          <h2>{this.props.title}</h2>
+          <WrappedComponent />
+        </>
       }
       return <WrappedComponent />
     }
   }
 }
 
-const LoadingComponent = withLoadingComponent(Hello);
+const Quiz3 = makeMoreText(HelloGGB)
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoadingComponent /> 
+    <Quiz3 /> 
+    <Quiz3 title={`I'm Builder`} /> 
   </React.StrictMode>,
   document.getElementById('root')
 );
