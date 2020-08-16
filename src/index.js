@@ -4,38 +4,23 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-class InputComp extends React.Component {
+function CompositionExample(props) {
+  return <><h2>{props.title}</h2></>
+}
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: props.name
-    }
-  }
-
-  onChange = (event) => {
-    const name = event.target.value;
-    this.setState({name});
-  }
-
-  onSubmit = (event) => {
-    event.preventDefault();
-    alert('Your name is ' + this.state.name);
-  }
-
-  render() {
-    const { name } = this.state;
-    const header = name ? <h1>Hello, {name}.</h1> : null;
-    return <form onSubmit={this.onSubmit}>
-      {header}
-      <input value={name} onChange={this.onChange} />
-    </form>
-  }
+function Composition() {
+  return <>
+   <h1>Hello World</h1>
+   <CompositionExample title={'Hello World H2'}>
+      Hello World H2
+   </CompositionExample>
+   <h3>Hello World H3</h3>
+  </>
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <InputComp name={'props ka'}/> 
+    <Composition/> 
   </React.StrictMode>,
   document.getElementById('root')
 );
