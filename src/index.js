@@ -1,67 +1,22 @@
-import React, { useState, useEffect, createContext, useContext, useReducer, useMemo, useCallback} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import styled from 'styled-components';
+import TodoRedux from './redux/TodoRedux';
+import reducer from './redux/reducer';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux';
 
-function Quiz() {
-  const [list, setList] = useState([]);
+// Redux
 
-  const handleKey = (event) => {
-    const { value } = event.target;
-    if (event.key === 'Enter') {
-      setList([...list, value]);
-    }
-  }
-
-  return(
-    <>
-      <input onKeyUp={handleKey} />
-      <ul>
-        {list.map((t, i) => <li key={i}>{t}</li>)}
-      </ul>
-    </>
-  )
-}
-
-// styled
-
-const TodoXList = styled.li`
-  color: ${props => props.color ? props.color : "blue"};
-`;
-const TodoXListPlus = styled(TodoXList)`
-  background-color: pink;
-  :hover {
-    background-color: tomato;
-  }
-`
-
-function Todo() {
-  const [todos, setTodos] = useState([]);
-
-  const onKeyUp = (event) => {
-    if (event.key === 'Enter') {
-      const { value } = event.target;
-      setTodos([...todos, value]);
-      event.target.value = "";
-    }
-  }
-
-  return(
-    <>
-      <input onKeyUp={onKeyUp}/>
-      <ul>
-        {todos.map((todo, i) => <TodoXListPlus key={i}>{todo}</TodoXListPlus>)}
-      </ul>
-    </>
-  )
-}
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Quiz /> 
-    <Todo />
+    <Provider store={store}>
+      <TodoRedux /> 
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
