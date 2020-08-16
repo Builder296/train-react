@@ -6,11 +6,7 @@ import * as serviceWorker from './serviceWorker';
 const ColorContext = React.createContext({});
 const FontSizeContent = React.createContext({});
 
-/**
- * Error Bounderies
-  - handle error
-  - send error to service
-  */
+// HOC 
 
 class Todo extends React.Component {
   render() {
@@ -81,9 +77,31 @@ class App extends React.Component {
   }
 }
 
+
+// Note : USE 
+// -> export default withLoadingComponent(App);
+// -> <LoadingComponent isLoading={ture} /> 
+
+function Hello() {
+  return <h1>Hello! Geeky Base.</h1>
+}
+
+const withLoadingComponent = (WrappedComponent) => {
+  return class componentLoading extends React.Component {
+    render() {
+      if (this.props.loading) {
+        return <div>Loading</div>
+      }
+      return <WrappedComponent />
+    }
+  }
+}
+
+const LoadingComponent = withLoadingComponent(Hello);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App /> 
+    <LoadingComponent /> 
   </React.StrictMode>,
   document.getElementById('root')
 );
