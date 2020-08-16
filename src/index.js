@@ -3,15 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-const ColorContext = React.createContext();
+const ColorContext = React.createContext({});
+const FontSizeContent = React.createContext({});
 
-class Todo extends React.Component { // class use just one provider // hook cab use more
-  static contextType = ColorContext;
+// consumer (can use nore provider)
+
+class Todo extends React.Component {
   render() {
-    return <h3 style={{ color: this.context.color }}> { this.props.title } </h3>
+    return (
+      <ColorContext.Consumer>
+        {({color}) => (
+          <FontSizeContent.Consumer>
+            {({fontSize}) => (
+              <h3 style={{ color , fontSize: fontSize + 'px' }}> { this.props.title } </h3>
+            )}
+          </FontSizeContent.Consumer>
+        )}
+      </ColorContext.Consumer>
+    )
   }
 }
-
 
 
 function TodoList() {
@@ -23,16 +34,24 @@ function TodoList() {
 
 class App extends React.Component {
   state = {
-    color: 'red'
+    color: 'red',
+    fontSize: 17,
+    toggleColor: () => {
+      this.setState(() => ({ color: 'pink'}))
+    }
   }
   render() {
+    const { color, fontSize, toggleColor } = this.state;
     return (
-      <ColorContext.Provider value={this.state}>
-        <TodoList />
+      <ColorContext.Provider value={{ color, toggleColor }}>
+        <FontSizeContent.Provider value={{ fontSize }}>
+          <TodoList />
+        </FontSizeContent.Provider>
       </ColorContext.Provider>
     )
   }
 }
+
 
 ReactDOM.render(
   <React.StrictMode>
