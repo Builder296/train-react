@@ -3,60 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Hook
-// - useCallback
-//// return callback fn / memorize obj.
-// - useMemo : watching
-//// return value / memorize value
+// Hook : Quiz
 
-const ColorContext = createContext({color: "red"});
+function Quiz() {
+  const [list, setList] = useState([]);
 
-// function useCountTitle(count, title) {
-//   const [name, setName] = useState("");
-
-//   useEffect(() => {
-//     setName(title + ' ' + count);
-//   },[count, title]);
-
-//   return name;
-// }
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'increment':
-      return state + 1;
-    case 'decrement':
-      return state - 1;
-    default:
-      return state;
-
+  const handleKey = (event) => {
+    const { value } = event.target;
+    if (event.key === 'Enter') {
+      setList([...list, value]);
+    }
   }
-}
-
-function Example(props) {
-  const [count, dispatchCount] = useReducer(reducer, 0); // no specific name
-  const [title, setTitle] = useState("");
-  const { color } = useContext(ColorContext)
-
-  // const name = useCountTitle(count, title);
-  // const name = useMemo(() => title + ' ' + count, [title, count]);
-  const name = useCallback((a) => title + ' ' + (count * a), [title, count]);
 
   return(
     <>
-      <h3 style={{color: color}}>{name(2)}</h3>
-      <h1>This is title: {title}</h1>
-      <input value={title} onChange={(event) => setTitle(event.target.value)}/>
-      <h2>{count}</h2>
-      <button onClick={() => dispatchCount({type: "increment"})}>Increment!</button>
-      <button onClick={() => dispatchCount({type: "decrement"})}>Decrement!</button>
+      <input onKeyUp={handleKey} />
+      <ul>
+        {list.map((t, i) => <li key={i}>{t}</li>)}
+      </ul>
     </>
   )
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <Example /> 
+    <Quiz /> 
   </React.StrictMode>,
   document.getElementById('root')
 );
