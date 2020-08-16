@@ -10,6 +10,14 @@ function Example(props) {
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState("");
 
+  // useEffect has 2 param :
+  // (callback fn, watch some state)
+  // it's working when your interest state is changed.
+  // ps. call once time when component mount.
+  useEffect(() => {
+    console.log("This is effect");
+  },[title]);
+
   return(
     <>
       <h1>This is title: {title}</h1>
