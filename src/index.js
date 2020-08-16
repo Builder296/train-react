@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext, useReducer, useMemo} from 'react';
+import React, { useState, useEffect, createContext, useContext, useReducer, useMemo, useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -39,11 +39,12 @@ function Example(props) {
   const { color } = useContext(ColorContext)
 
   // const name = useCountTitle(count, title);
-  const name = useMemo(() => title + ' ' + count, [title, count]);
+  // const name = useMemo(() => title + ' ' + count, [title, count]);
+  const name = useCallback((a) => title + ' ' + (count * a), [title, count]);
 
   return(
     <>
-      <h3 style={{color: color}}>{name}</h3>
+      <h3 style={{color: color}}>{name(2)}</h3>
       <h1>This is title: {title}</h1>
       <input value={title} onChange={(event) => setTitle(event.target.value)}/>
       <h2>{count}</h2>
