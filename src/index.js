@@ -5,14 +5,16 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 function CompositionExample(props) {
-  return <><h2>{props.title}</h2></>
+  return props.children;
 }
 
 function Composition() {
+  const isEven = (parseInt(Math.random()*10,10) % 2) === 0;
+  const element = isEven ? <h2>Hello Even</h2> : <span>Odd</span>
   return <>
    <h1>Hello World</h1>
-   <CompositionExample title={'Hello World H2'}>
-      Hello World H2
+   <CompositionExample>
+      {element}
    </CompositionExample>
    <h3>Hello World H3</h3>
   </>
