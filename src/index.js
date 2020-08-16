@@ -8,13 +8,17 @@ import * as serviceWorker from './serviceWorker';
 
 function Example(props) {
   const [count, setCount] = useState(0);
-  const [title, setTitle] = useState("-");
+  const [title, setTitle] = useState("");
 
   const [name, setName] = useState("");
 
   useEffect(() => {
     setName(title + ' ' + count);
-  },[]); // call once time when component is mounted
+  },[title, count]);
+
+  useEffect(() => {
+    console.log("useEffect number 2");
+  },[]);
 
   return(
     <>
