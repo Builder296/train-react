@@ -6,7 +6,11 @@ import * as serviceWorker from './serviceWorker';
 const ColorContext = React.createContext({});
 const FontSizeContent = React.createContext({});
 
-// consumer (can use nore provider)
+/**
+ * Error Bounderies
+  - handle error
+  - send error to service
+  */
 
 class Todo extends React.Component {
   render() {
@@ -32,7 +36,7 @@ function TodoList() {
   </>
 }
 
-class App extends React.Component {
+class App2 extends React.Component {
   state = {
     color: 'red',
     fontSize: 17,
@@ -52,10 +56,34 @@ class App extends React.Component {
   }
 }
 
+class ErrorBounderies extends React.Component {
+  state = {
+    isError: false
+  }
+
+  static getDerivedStateFromError(error) {
+
+  }
+
+  render() {
+    return <>
+      {this.state.isError ? <span>Something when weong.</span> : <span>Goooood.</span>}
+    </>
+  }
+}
+class App extends React.Component {
+  render() {
+    return <>
+      <ErrorBounderies>
+        <App2 />
+      </ErrorBounderies>
+    </>
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/> 
+    <App /> 
   </React.StrictMode>,
   document.getElementById('root')
 );
