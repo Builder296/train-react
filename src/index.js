@@ -8,9 +8,11 @@ const ColorContext = React.createContext();
 class Todo extends React.Component { // class use just one provider // hook cab use more
   static contextType = ColorContext;
   render() {
-    return <h3 style={{ color: this.context }}> { this.props.title } </h3>
+    return <h3 style={{ color: this.context.color }}> { this.props.title } </h3>
   }
 }
+
+
 
 function TodoList() {
   return <>
@@ -20,9 +22,12 @@ function TodoList() {
 }
 
 class App extends React.Component {
+  state = {
+    color: 'red'
+  }
   render() {
     return (
-      <ColorContext.Provider value={'red'}>
+      <ColorContext.Provider value={this.state}>
         <TodoList />
       </ColorContext.Provider>
     )
