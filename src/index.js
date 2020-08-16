@@ -1,21 +1,25 @@
-import React, { useState, useEffect, createContext, useContext, useReducer } from 'react';
+import React, { useState, useEffect, createContext, useContext, useReducer, useMemo} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Hook : useReducer
+// Hook
+// - useCallback
+//// return callback fn / memorize obj.
+// - useMemo : watching
+//// return value / memorize value
 
 const ColorContext = createContext({color: "red"});
 
-function useCountTitle(count, title) {
-  const [name, setName] = useState("");
+// function useCountTitle(count, title) {
+//   const [name, setName] = useState("");
 
-  useEffect(() => {
-    setName(title + ' ' + count);
-  },[count, title]);
+//   useEffect(() => {
+//     setName(title + ' ' + count);
+//   },[count, title]);
 
-  return name;
-}
+//   return name;
+// }
 
 function reducer(state, action) {
   switch (action.type) {
@@ -34,7 +38,8 @@ function Example(props) {
   const [title, setTitle] = useState("");
   const { color } = useContext(ColorContext)
 
-  const name = useCountTitle(count, title);
+  // const name = useCountTitle(count, title);
+  const name = useMemo(() => title + ' ' + count, [title, count]);
 
   return(
     <>
