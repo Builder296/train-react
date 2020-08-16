@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Hook : Example for Quiz
+import styled from 'styled-components';
 
 function Quiz() {
   const [list, setList] = useState([]);
@@ -25,6 +25,18 @@ function Quiz() {
   )
 }
 
+// styled
+
+const TodoXList = styled.li`
+  color: ${props => props.color ? props.color : "blue"};
+`;
+const TodoXListPlus = styled(TodoXList)`
+  background-color: pink;
+  :hover {
+    background-color: tomato;
+  }
+`
+
 function Todo() {
   const [todos, setTodos] = useState([]);
 
@@ -40,7 +52,7 @@ function Todo() {
     <>
       <input onKeyUp={onKeyUp}/>
       <ul>
-        {todos.map((todo, i) => <li key={i}>{todo}</li>)}
+        {todos.map((todo, i) => <TodoXListPlus key={i}>{todo}</TodoXListPlus>)}
       </ul>
     </>
   )
