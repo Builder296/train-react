@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Hook : Quiz
+// Hook : Example for Quiz
 
 function Quiz() {
   const [list, setList] = useState([]);
@@ -25,9 +25,31 @@ function Quiz() {
   )
 }
 
+function Todo() {
+  const [todos, setTodos] = useState([]);
+
+  const onKeyUp = (event) => {
+    if (event.key === 'Enter') {
+      const { value } = event.target;
+      setTodos([...todos, value]);
+      event.target.value = "";
+    }
+  }
+
+  return(
+    <>
+      <input onKeyUp={onKeyUp}/>
+      <ul>
+        {todos.map((todo, i) => <li key={i}>{todo}</li>)}
+      </ul>
+    </>
+  )
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Quiz /> 
+    <Todo />
   </React.StrictMode>,
   document.getElementById('root')
 );
