@@ -1,12 +1,9 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext, useContext, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Hook : note
-// / use on React component
-// / use on top-level
-// x use in loop
+// Hook : useReducer
 
 const ColorContext = createContext({color: "red"});
 
@@ -20,22 +17,24 @@ function useCountTitle(count, title) {
   return name;
 }
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return state + 1;
+    case 'decrement':
+      return state - 1;
+    default:
+      return state;
+
+  }
+}
+
 function Example(props) {
-  const [count, setCount] = useState(0);
+  const [count, dispatchCount] = useReducer(reducer, 0); // no specific name
   const [title, setTitle] = useState("");
   const { color } = useContext(ColorContext)
 
   const name = useCountTitle(count, title);
-
-  useEffect(() => {
-    console.log("useEffect number 2");
-    const interval = setInterval(() => {
-      console.log('xxXxx');
-    }, 2000)
-    return () => {
-      clearInterval(interval);
-    }
-  },[]);
 
   return(
     <>
@@ -43,7 +42,8 @@ function Example(props) {
       <h1>This is title: {title}</h1>
       <input value={title} onChange={(event) => setTitle(event.target.value)}/>
       <h2>{count}</h2>
-      <button onClick={() => setCount(count+1)}>Click!</button>
+      <button onClick={() => dispatchCount({type: "increment"})}>Increment!</button>
+      <button onClick={() => dispatchCount({type: "decrement"})}>Decrement!</button>
     </>
   )
 }
