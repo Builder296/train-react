@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-// Hook : custom hook
+// Hook : note
+// / use on React component
+// / use on top-level
+// x use in loop
 
 const ColorContext = createContext({color: "red"});
 
@@ -20,7 +23,7 @@ function useCountTitle(count, title) {
 function Example(props) {
   const [count, setCount] = useState(0);
   const [title, setTitle] = useState("");
-  const { color } = useContext(ColorContext) // can use just name
+  const { color } = useContext(ColorContext)
 
   const name = useCountTitle(count, title);
 
