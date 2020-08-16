@@ -3,20 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-function Todo({ color, title }) {
-  return <h3 style={{ color}}>{title}</h3>
+const ColorContext = React.createContext();
+
+class Todo extends React.Component { // class use just one provider // hook cab use more
+  static contextType = ColorContext;
+  render() {
+    return <h3 style={{ color: this.context }}> { this.props.title } </h3>
+  }
 }
 
-function TodoList({color}) {
+function TodoList() {
   return <>
-    <Todo title={'todo 1'} color={color}></Todo>
-    <Todo title={'todo 2'} color={color}></Todo>
+    <Todo title={'todo 1'} ></Todo>
+    <Todo title={'todo 2'} ></Todo>
   </>
 }
 
 class App extends React.Component {
   render() {
-    return <TodoList color={'red'} />
+    return (
+      <ColorContext.Provider value={'red'}>
+        <TodoList />
+      </ColorContext.Provider>
+    )
   }
 }
 
