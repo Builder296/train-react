@@ -8,18 +8,17 @@ import * as serviceWorker from './serviceWorker';
 
 function Example(props) {
   const [count, setCount] = useState(0);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("-");
 
-  // useEffect has 2 param :
-  // (callback fn, watch some state)
-  // it's working when your interest state is changed.
-  // ps. call once time when component mount.
+  const [name, setName] = useState("");
+
   useEffect(() => {
-    console.log("This is effect");
-  },[title]);
+    setName(title + ' ' + count);
+  },[]); // call once time when component is mounted
 
   return(
     <>
+      <h3>{name}</h3>
       <h1>This is title: {title}</h1>
       <input value={title} onChange={(event) => setTitle(event.target.value)}/>
       <h2>{count}</h2>
