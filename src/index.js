@@ -18,6 +18,12 @@ function Example(props) {
 
   useEffect(() => {
     console.log("useEffect number 2");
+    const interval = setInterval(() => {
+      console.log('xxXxx');
+    }, 2000)
+    return () => {
+      clearInterval(interval); // do when component is die Hahahahahahah
+    }
   },[]);
 
   return(
