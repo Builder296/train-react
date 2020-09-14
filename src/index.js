@@ -1,41 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-class InputComp extends React.Component {
+import TodoRedux from './redux/TodoRedux';
+import reducer from './redux/reducer';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux';
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: props.name
-    }
-  }
+// Redux
 
-  onChange = (event) => {
-    const name = event.target.value;
-    this.setState({name});
-  }
-
-  onSubmit = (event) => {
-    event.preventDefault();
-    alert('Your name is ' + this.state.name);
-  }
-
-  render() {
-    const { name } = this.state;
-    const header = name ? <h1>Hello, {name}.</h1> : null;
-    return <form onSubmit={this.onSubmit}>
-      {header}
-      <input value={name} onChange={this.onChange} />
-    </form>
-  }
-}
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <InputComp name={'props ka'}/> 
+    <Provider store={store}>
+      <TodoRedux /> 
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
